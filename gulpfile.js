@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     del = require('del'),
     webserver = require('gulp-webserver'),
-    react = require('gulp-react');
+    react = require('gulp-react'),
+    merge = require('merge-stream');
 
 
 gulp.task('html', function() {
@@ -23,7 +24,7 @@ gulp.task('html', function() {
 });
 
 gulp.task('styles', function() {
-    return sass('src/css/**/*.scss', {
+    var sass_styles = sass('src/css/**/*.scss', {
             style: 'expanded'
         })
         .pipe(autoprefixer('last 2 version'))
@@ -34,8 +35,18 @@ gulp.task('styles', function() {
         .pipe(minifycss())
         .pipe(gulp.dest('dist/css'))
         .pipe(notify({
-            message: 'Styles task complete'
+            message: 'SCSS task complete'
         }));
+
+    var css_styles = gulp.src('src/css/**/*.css')
+        .pipe(minifycss())
+        .pipe(gulp.dest('dist/css'))
+        .pipe(notify({
+            message: 'CSS task complete'
+        }));
+
+    return merge(sass_styles, css_styles);
+
 });
 
 //
@@ -57,6 +68,7 @@ gulp.task("bower-components", function() {
     var react_with_addons = gulp.src('bower_components/react/react-with-addons.js')
         .pipe(gulp.dest('dist/bower_components/react'));
 
+    var pure = gulp.src('bower_components/pure/')
     return react_with_addons;
 })
 
