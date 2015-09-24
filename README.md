@@ -13,9 +13,9 @@ To build, `gulp` is expected to be present, along with `npm` and `sass`.
 
 * `npm install` after entering into the folder to pull all dependences
 * `gem install sass` for SASS preprocessor
-* `gulp watch` to create a local webserver that builds and compiles to the `dist/` folder
+* `gulp` to create a local webserver that builds and compiles to the `dist/` folder
 
 
 ### How to deploy
 
-run `gulp watch`, and copy everything from `dist/` to the folder where we want to deploy to.
+run `gulp`, and copy everything from `dist/` to the folder where we want to deploy to.
