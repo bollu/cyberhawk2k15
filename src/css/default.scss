@@ -1,6 +1,48 @@
+$white: #ffffff;
+$blue: #72a3bc;
+$purple_brightest: #6c77b7;
+$purple_darkest: #2b2160;
+$red: #f0307d;
+$pink: #EE6383;
+@font-face {
+    font-family: 'Lato';
+    src: url(fonts/Lato-Regular.ttf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url(fonts/Lato-Light.ttf);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'RobotoCondensed';
+    src: url(fonts/RobotoCondensed-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'RobotoCondensed';
+    src: url(fonts/RobotoCondensed-Light.ttf);
+    font-weight: 300;
+}
+
 body {
-    background-color: #dddddd;
-    h1 {
-        border: 1px solid #DDDDDD;
+    background-color: #FBF9F3;
+    color: #505050;
+    font-family: 'Lato';
+    font-family: 'RobotoCondensed';
+    .hero {
+        text-align: center;
+        font-size: 5em;
+        transition: font-size 3s ease;
+        font-family: 'RobotoCondensed'
     }
+}
+
+.login-container {
+    margin: 0em;
+    width: 100%;
+    height: 100%;
+    background-color: #7393be;
 }
