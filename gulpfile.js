@@ -2,17 +2,16 @@ var gulp = require('gulp'),
     sass = require('gulp-ruby-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
-    jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
-    cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
     del = require('del'),
     webserver = require('gulp-webserver'),
     react = require('gulp-react'),
-    merge = require('merge-stream');
+    merge = require('merge-stream'),
+    plumber = require('gulp-plumber');;
 
 
 gulp.task('html', function() {
@@ -22,6 +21,14 @@ gulp.task('html', function() {
             message: "html task complete"
         }));
 });
+
+gulp.task('fonts', function() {
+    return gulp.src("src/css/fonts/*.*")
+        .pipe(gulp.dest("dist/css/fonts"))
+        .pipe(notify({
+            message: "fonts task complete"
+        }));
+})
 
 gulp.task('styles', function() {
     var sass_styles = sass('src/css/**/*.scss', {
@@ -75,6 +82,7 @@ gulp.task("bower-components", function() {
 gulp.task('react', function() {
     return gulp.src('src/jsx/**/*.jsx')
         .pipe(concat('react.js'))
+        .pipe(plumber())
         .pipe(react())
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'))
@@ -84,6 +92,8 @@ gulp.task('react', function() {
 });
 
 gulp.task('watch', function() {
+    // Create LiveReload server
+    livereload.listen();
     gulp.watch("src/**/*.html", ['html']);
     // Watch .scss files
     gulp.watch('src/css/**/*.scss', ['styles']);
@@ -91,17 +101,19 @@ gulp.task('watch', function() {
     //gulp.watch('src/js/**/*.js', ['scripts']);
     // Watch .jsx files
     gulp.watch('src/jsx/**/*.jsx', ['react']);
+    //Watch font files
+    gulp.watch('src/fonts/**/*.*', ['fonts']);
     //Watch bower_components
     gulp.watch('bower_components/', ['bower-components']);
-
-    // Create LiveReload server
-    livereload.listen();
     // Watch any files in dist/, reload on change
     gulp.watch(['dist/**']).on('change', livereload.changed);
 
 });
 
-gulp.task('webserver', function() {
+gulp.task('default', ['watch']);
+
+
+gulp.task('webserver', ['watch'], function() {
     gulp.src('dist')
         .pipe(webserver({
             livereload: true,
@@ -109,6 +121,3 @@ gulp.task('webserver', function() {
             open: true
         }));
 });
-
-
-gulp.task('default', ['html', 'styles', 'bower-components', 'react', 'watch', 'webserver']);
