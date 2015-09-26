@@ -76,7 +76,13 @@ gulp.task("bower-components", function() {
         .pipe(gulp.dest('dist/bower_components/react'));
 
     var pure = gulp.src('bower_components/pure/')
-    return react_with_addons;
+    var typedjs = gulp.src('bower_components/typed.js/dist/typed.min.js')
+        .pipe(gulp.dest('dist/bower_components/typed.js'));
+
+    var jquery = gulp.src('bower_components/jquery/dist/jquery.min.js')
+        .pipe(gulp.dest('dist/bower_components/jquery'));
+
+    return merge(react_with_addons, typedjs);
 })
 
 gulp.task('react', function() {
