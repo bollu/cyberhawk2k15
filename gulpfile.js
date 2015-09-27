@@ -75,14 +75,16 @@ gulp.task("bower-components", function() {
     var react_with_addons = gulp.src('bower_components/react/react-with-addons.js')
         .pipe(gulp.dest('dist/bower_components/react'));
 
-    var pure = gulp.src('bower_components/pure/')
     var typedjs = gulp.src('bower_components/typed.js/dist/typed.min.js')
         .pipe(gulp.dest('dist/bower_components/typed.js'));
 
     var jquery = gulp.src('bower_components/jquery/dist/jquery.min.js')
         .pipe(gulp.dest('dist/bower_components/jquery'));
 
-    return merge(react_with_addons, typedjs);
+    var react_motion = gulp.src("bower_components/react-motion/build/react-motion.js")
+        .pipe(gulp.dest('dist/bower_components/react-motion'));
+
+    return merge(react_with_addons, typedjs, jquery, react_motion);
 })
 
 gulp.task('react', function() {

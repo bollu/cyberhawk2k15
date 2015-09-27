@@ -29,22 +29,47 @@ $pink: #EE6383;
 }
 
 body {
-    background-color: #FBF9F3;
-    color: #505050;
+    background-color: #E9E4DE;
+    color: #ACACAC;
     font-family: 'Lato';
     font-family: 'RobotoCondensed';
+}
+
+.hero-container {
     .hero {
         text-align: center;
-        font-size: 5em;
+        font-size: 3em;
         transition: font-size 3s ease;
         font-family: 'RobotoCondensed'
     }
+    height: 20%;
+    min-width: 100%;
 }
 
 .login-container {
     margin: 0em;
     width: 100%;
-    height: 100%;
+    height: 70%;
     padding-top: 3em;
     background-color: #7393be;
+    height: 90%;
+    h4 {
+        padding-top: 3em;
+        font-weight: 300;
+        color: #ffffff;
+        font-family: 'RobotoCondensed';
+    }
+}
+
+.footer {
+    background-color: #333333;
+    height: 10%;
+    padding-top: 3em;
+    padding-left: 2em;
+    font-family: 'RobotoCondensed';
+    font-weight: 400;
+    color: #666666;
+    .love {
+        color: #EE6383;
+    }
 }
